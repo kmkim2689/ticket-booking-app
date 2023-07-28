@@ -1,19 +1,51 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      home: Material(
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "My First App", // 앱 이름
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+      ),
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // 본격적으로 앱 화면에 보여질 요소들을 디자인
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("My First App"), // 앱바에서 보여주는 타이틀
+      ),
+      body: Center(
         child: Column(
-          children: [
-            Text("hello, welcome back"),
-            Text("Login to Continue")
-          ],
+          children: [Text("hello, welcome back"), Text("Login to Continue")],
         ),
       ),
-    )
-  );
+    );
+  }
 }
+
+// void main() {
+//   runApp(
+//     MaterialApp(
+//       home: Material(
+//         child: Column(
+//           children: [
+//             Text("hello, welcome back"),
+//             Text("Login to Continue")
+//           ],
+//         ),
+//       ),
+//     )
+//   );
+// }
 
 // class MyApp extends StatelessWidget {
 //   const MyApp({super.key});
