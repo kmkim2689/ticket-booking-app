@@ -182,11 +182,11 @@
             @override
             Widget build(BuildContext context) {
                 return MaterialApp(
-                title: "My First App",
-                theme: ThemeData(
-                    primarySwatch: Colors.deepPurple,
-                ),
-                home: MyHomePage(),
+                    title: "My First App",
+                    theme: ThemeData(
+                        primarySwatch: Colors.deepPurple,
+                    ),
+                    home: MyHomePage(),
                 );
             }
         }
@@ -203,3 +203,149 @@
                     * child // Center의 constructor
                         * Column() : 세로로 배치
                             * children : [] 내부에 위젯들을 배열. 각 위젯은 쉼표(,)로 구분
+
+        > class MyHomePage extends StatelessWidget {
+            @override
+            Widget build(BuildContext context) {
+                // 본격적으로 앱 화면에 보여질 요소들을 디자인
+                return Scaffold(
+                    appBar: AppBar(
+                        title: Text("My First App"), // 앱바에서 보여주는 타이틀
+                    ),
+                    body: Center(
+                        child: Column(
+                        children: [Text("hello, welcome back"), Text("Login to Continue")],
+                        ),
+                    ),
+                );
+            }
+        }
+
+---
+
+### Charater Page Design
+
+* 기본 코드
+
+        import 'package:flutter/material.dart';
+        
+        // 캐릭터 페이지 디자인
+        void main() => runApp(MyApp());
+        
+        class MyApp extends StatelessWidget {
+        
+          @override
+          Widget build(BuildContext context) {
+            return MaterialApp(
+              title: "Character Card", // 앱 이름
+              theme: ThemeData(
+                primarySwatch: Colors.deepPurple,
+              ),
+              home: MyCard(),
+            );
+          }
+        }
+        
+        class MyCard extends StatelessWidget {
+          @override
+          Widget build(BuildContext context) {
+            return Scaffold(
+              appBar: AppBar(
+                title: Text("Character Card"),
+              ),
+            );
+          }
+        }
+
+* Scaffold의 생성자들
+    * backgroundColor : body의 background color
+    * appBar : AppBar 설정
+    * body : AppBar 아래 주요 화면 구현
+
+* AppBar의 생성자들
+    * title을 중앙에 넣고자 한다면?
+        * AppBar의 centerTitle 생성자를 true로 설정
+    * AppBar의 Background 색상을 지정해주고 싶다면?
+        * backgroundColor 생성자를 색깔로 설정
+        * Colors.색상명 // Material에서 지원해주는 색상
+    * AppBar의 그림자를 설정하는 elevation
+        * AppBar가 표면으로부터 띄워져있는 효과를 얼마나 줄 것인지 설정 가능
+        * 소수점 단위까지 정밀하게 설정 가능
+
+* Center
+    * child 생성자 존재 => 'child' 위젯을 정중앙에 배치하는 역할
+    * 주의
+        * Center위젯의 child로 어떤 위젯이 오느냐에 따라 정중앙으로 배치되는 것이 다르다.
+        * Center 위젯의 자식 위젯으로 Column이 온다면 좌우로 정중앙으로 정렬해주지만, 상하 정렬은 Column의 mainAxisAlignment에서 결정된다.
+        * 반면 자식 위젯으로 Row가 온다면, 상하로 정중앙으로 정렬해주지만, 좌우정렬은 Row의 mainAxisAlignment에서 결정된다.
+
+* Padding
+    * 사용하고자 하는 위젯이 특정 지점으로부터 얼마나 떨어지도록 할 것인지 그 거리를 설정하도록 하는 보이지 않는 Widget
+    * 생성자들
+        * padding: EdgeInsets.from~
+            * 'children 요소'들이 Padding 컨테이너의 상하좌우 끝에서 얼만큼 떨어지도록 할 것인지 설정한다.
+            * fromLTRB : 상하좌우 모두 설정
+
+* Column
+    * mainAxisAlignment
+        * Column은 위아래로 children을 배치한다. mainAxis라는 것은 column의 정렬 방식인 위아래 방향의 축이라고 보면 된다.
+        * column의 Alignment는 위아래로 어느 곳에 children들을 정렬시킬 것인지 결정하는 것이다.
+        * MainAxisAlignment.xxx
+            * start
+            * end
+            * center
+            * spaceBetween
+            * spaceAround
+            ...
+
+    * crossAxisAlignment
+        * mainAxis와 수직 방향의 축을 기준으로 정렬
+        * 즉 Column에서 crossAxisAlignment는 Column 내부 children에 대한 좌우 정렬을 결정
+        * CrossAxisAlignment
+            * start
+            * end
+            * center
+            * stretch
+            * baseline...
+
+
+* Text
+    * data : 말 그대로 들어갈 텍스트 내용
+    * named constructors
+        * style : 텍스트의 스타일을 지정
+            * TextStyle로 지정 가능
+                * color, fontWeight, fontSize, letterSpacing... 등등
+
+* SizedBox
+    * 요소 간 간격 설정을 위하여 사용되는 위젯
+    * 생성자들로 width, height, child 등이 있다
+
+
+* 이미지 사용하는 방법
+    * pubspec.yaml
+    * assets가 주석처리 되어있는 것을 해제
+    * 이미지에 대한 경로를 명시해준다.
+    > assets/pic.jpg
+    * indentation에 유의하기
+
+* CircleAvatar 위젯
+    * Flutter에서 제공하는, 원형으로 이미지를 넣을 수 있는 위젯
+    * 둥글게 프로필 사진을 만들고 싶을 때 사용
+    * constructors
+        * backgroundImage : AssetImage(이미지경로)
+        * radius : circle의 크기를 조절 가능
+        * backgroundColor : png 파일의 경우 circleavatar가 위치하는 배경의 색과 동일하게 하면 해당 이미지만 있는 것 같은 효과 조성 가능
+    * tip
+        * CircleAvater 위젯에 나타나는 노란 전구 아이콘 클릭
+        * Wrap with Center -> 해당 위젯을 Center로 감싸줌으로써 CircleAvatar를 가운데 정렬 가능
+
+* Divider 위젯
+    * 구분선을 그려줌
+    * height : 공간의 전체 높이. divider는 상하로 중앙에 위치한다. divider 위로 30px padding, 아래로 30px padding이 주어진다는 의미
+    * color : 색상
+    * thickness : 두께
+    * endIndent : 끝에서부터 얼만큼 떨어뜨릴 것인지
+    * 여기서는 body의 padding이 좌로 30으로 지정되어 있기 때문에 endIndent를 startpadding과 같은 값으로 설정하면 됨
+
+* 코드
+
