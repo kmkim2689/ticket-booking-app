@@ -349,3 +349,248 @@
 
 * 코드
 
+    import 'package:flutter/material.dart';
+    
+    // 캐릭터 페이지 디자인
+    
+    void main() => runApp(MyApp());
+    
+    class MyApp extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Character',
+          home: Grade(),
+        );
+      }
+    }
+    
+    class Grade extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) {
+        return Scaffold(
+            backgroundColor: Colors.amber[800],
+            appBar: AppBar(
+              title: const Text('Character'),
+              backgroundColor: Colors.amber[700],
+              centerTitle: true,
+              elevation: 0.0,
+            ),
+            body: Padding(
+              padding: EdgeInsets.fromLTRB(30.0, 40.0, 0.0, 0.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Center(
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage("assets/pic.jpg"),
+                      radius: 40.0,
+                    ),
+                  ),
+                  Divider(
+                    height: 60.0,
+                    color: Colors.grey[850],
+                    thickness: 0.5,
+                    endIndent: 30.0,
+                  ),
+                  Text(
+                    "Name",
+                    style: TextStyle(
+                      color: Colors.white,
+                      letterSpacing: 2.0,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Text(
+                    "banto",
+                    style: TextStyle(
+                      color: Colors.white,
+                      letterSpacing: 2.0,
+                      fontSize: 28.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  Text(
+                    "level",
+                    style: TextStyle(
+                      color: Colors.white,
+                      letterSpacing: 2.0,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Text(
+                    "14",
+                    style: TextStyle(
+                      color: Colors.white,
+                      letterSpacing: 2.0,
+                      fontSize: 28.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.check_circle_outline,
+                        color: Colors.white,
+                        size: 30.0,
+                      ),
+                      SizedBox(
+                        width: 10.0,
+                      ),
+                      Text(
+                        "using lightsaber",
+                        style: TextStyle(
+                          color: Colors.white,
+                          letterSpacing: 1.0,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.check_circle_outline,
+                        color: Colors.white,
+                        size: 30.0,
+                      ),
+                      SizedBox(
+                        width: 10.0,
+                      ),
+                      Text(
+                        "using lightsaber",
+                        style: TextStyle(
+                          color: Colors.white,
+                          letterSpacing: 1.0,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.check_circle_outline,
+                        color: Colors.white,
+                        size: 30.0,
+                      ),
+                      SizedBox(
+                        width: 10.0,
+                      ),
+                      Text(
+                        "using lightsaber",
+                        style: TextStyle(
+                          color: Colors.white,
+                          letterSpacing: 1.0,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )
+        );
+      }
+    }
+
+---
+
+### AppBar
+
+* AppBar를 이용하여 상당히 많은 기능 구현 가능
+
+* AppBar Widget의 constructor들
+    * title
+    * centerTitle(Boolean)
+    * elevation
+    * leading
+        * 아이콘 혹은 간단한 위젯을 앱바의 '좌측'에 위치시키는 기능
+        * 여기에 IconButton을 할당. 단순히 아이콘만 보여주려 하는 것이 아니라 눌렀을 때 반응해야 하기 때문.
+        * IconButton의 필수 속성들
+            * 필수 속성 : icon, onPressed
+            * IconButton에 있는 icon 속성으로 Icon위젯을 넣는 방식으로 구현
+                * Icons라는 Material 제공 아이콘 클래스 사용 가능
+            * onPressed에서는 클릭 시 실행되어야 할 내용들을 정의
+                * 함수의 형태는 반환값이 없는 함수(void)
+    
+    * action
+        * 아이콘을 앱바의 우측에 위치시키는 기능
+        * Widget의 리스트가 올 수 있다.
+        * 1개 이상의 아이콘 가능
+
+---
+
+### Drawer
+
+* Drawer의 구성
+    * Drawer head
+    * Menu
+
+* 주의점
+    * Scaffold에 Drawer를 추가할 수 있는데, 이 과정에서 AppBar의 leading 아이콘은 넣어줄 필요가 없다. 자동으로 AppBar에 메뉴 아이콘이 추가되기 때문이다.
+
+* Drawer 구현법
+    * Scaffold의 생성자 중 하나 -> Scaffold에 추가
+    * Scaffold 하위에 drawer 속성으로 Drawer위젯 호출
+        * Drawer의 속성
+            * child : ListView()
+
+* ListView
+    * 안드로이드의 RecyclerView, LazyColumn/Row/Grid 등과 유사
+    * 같은 형태의 아이템을 하나만 보여주는 것이 아니라 여러 개 보여주기 위해 사용
+    * ListView에서 아이템 하나하나를 Flutter에서는 'ListTile'이라고 한다.
+        * ListTitle에 대한 정의 역시 추후 필요할 것. 다만 플러터에서는 ListTile 포맷을 많이 제공해주고 있음... 커스텀하지 않아도 된다는 의미
+            * 속성들
+                * padding
+                * children
+                    * UserAccountsDrawerHeader
+                        * Drawer에서 상단에 유저의 사진과 이름, 이메일을 띄울 수 있도록 만들어진 위젯
+                        * currentAccountPicture
+                            * CircleAvatar 이용함으로써 계정 사진을 둥글게
+                        * otherAccountsPicture
+                            * 우측 상단에 간단하게 작게 다른 계정의 프로필 사진을 설정 가능
+                            * Widget의 리스트 삽입 가능 -> 즉 하나 이상의 다른 계정 추가 가능
+                        * accountName, accountEmail 필수
+                            * Text 위젯 삽입
+                        * onDetailsPressed : void 함수
+                            * 유저 정보 옆에 화살표를 띄움으로써, 추가 정보를 확인할 수 있도록 함
+                        * decoration : UserAccountsDrawerHeader를 하나의 Box로 간주한다는 점이 포인트. 이것을 꾸미겠다는 의미
+                            * BoxDecoration 위젯을 사용
+                                * color
+                                * borderRadius
+                                    * BorderRadius
+                                        * .only : 특정 모서리만  radius 설정 가능
+                    
+                    * ListTile : 반복되는 아이템
+                        * leading : 앞에 나오는 아이콘
+                        * title
+                        * onTap : 탭했을 때 동작 정의
+                        * trailing : 우측 끝에 있는 아이콘
+
+                    
+
+    * onPressed vs onTap
+        * 기능상으로는 거의 동일
+        * onPressed는 주로 버튼에 사용
+        * onTap은 주로 gestureDetector나 InkWell에 사용
+            * 일반 버튼의 onPressed와는 달리, ListTile 위젯은 길게  누르기, 두 번 탭하기 등 액션을 감지 가능할 수 있음.
+            * 예) 길게 누르기, 두 번 누르기 등의 이벤트를 위해 사용 
+
+    
+---
+
+### BuildContext
+
+
